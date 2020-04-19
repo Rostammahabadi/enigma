@@ -29,4 +29,25 @@ class EnigmaTest < MiniTest::Test
 		assert_equal "d", new_enigma.encode
 	end
 
+  # def test_it_can_encrypt_with_key_and_date
+	# 	skip
+	# 	enigma = Enigma.new
+
+	# 	assert_equal ({encryption: "keder ohulw", key: "02715", date: "040895"}), enigma.encrypt("hello world", "02715", "040895")
+	# end
+
+	# def test_it_can_decrypt_with_key_and_date
+	# 	skip
+	# 	enigma = Enigma.new
+
+	# 	assert_equal {decryption: "hello world", key: "02715", date: "040895"}, enigma.decrypt("keder ohulw", "02715", "040895")
+	# end
+
+	# def test_it_can_encrypt_with_key_using_todays_date
+	# 	skip
+	# 	enigma = Enigma.new
+
+	# 	assert_equal "encryption hash here", encrypted = enigma.encrypt("hello world", "02715")
+	# end
+
 end
