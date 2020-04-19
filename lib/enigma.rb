@@ -10,6 +10,7 @@ class Enigma
 		@key = key ||= generate_random_key
 		@date = date
 	end
+
   def generate_random_key
     rand(5 ** 5).to_s.rjust(5,'0')
   end
@@ -38,7 +39,7 @@ class Enigma
       character_set.find_index(letter)
     end
   end
-  
+
   def generate_encoded_message(array_of_indexes,shifts)
     encoded_message = []
     array_of_indexes.each.with_index do |char, index|
@@ -52,5 +53,35 @@ class Enigma
     end
     encoded_message.join
   end
+
+	def decrypt(message, key, date= Date.today)
+		@message = message.downcase.split("")
+		@key = key ||= generate_random_key
+		@date = date
+	end
+
+	def decode
+	    new_key = Key.new(key)
+	    new_key.create_keys
+	    offset = Offset.new(date)
+	    offset.create_offset
+	    shift = Shift.new(new_key,offset)
+	    shift.final_shift
+	    starting_indexes = get_starting_indices
+	    decode_message(starting_indexes,shift)
+  end
+
+	def decode_message(array_of_indexes, shifts)
+		decoded_message = []
+		array_of_indexes.each.with_index do |char, index|
+			if char == nil
+				decoded_message << message[index]
+				next
+			end
+			final_shift = char - shifts.shifts[index%4]
+			decoded_message << character_set.rotate(final_shift)[0]
+		end
+		decoded_message.join
+	end
 
 end
