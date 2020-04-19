@@ -3,7 +3,7 @@ class Offset
 
   attr_reader :aoffset, :boffset, :coffset, :doffset, :date
 
-  def initialize(date= Date.today)
+  def initialize(date)
     @date = date
     @aoffset = 0
     @boffset = 0
@@ -11,13 +11,15 @@ class Offset
     @doffset = 0
   end
 
-  # def format_date
-  #   binding.pry
-  #   date.strftime("%d%m%y")
-  # end
+  def format_date
+    date.strftime("%d%m%y")
+  end
 
 
   def create_offset
+    if date.class == Date
+      @date = format_date
+    end
     offset = (date.to_i**2).to_s.split("")
     @aoffset = offset[-4].to_i
     @boffset = offset[-3].to_i
