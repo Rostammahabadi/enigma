@@ -23,4 +23,10 @@ class EnigmaTest < MiniTest::Test
 		assert_equal "hxda", new_enigma.encode
 	end
 
+  def test_it_encodes_single_characters
+		new_enigma = Enigma.new
+		new_enigma.encrypt("A", "02715", "040895")
+		assert_equal "d", new_enigma.encode
+	end
+
 end
