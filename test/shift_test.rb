@@ -14,5 +14,11 @@ class ShiftTest < MiniTest::Test
     assert_instance_of Shift, Shift.new(Key.new('02715'), Offset.new)
   end
 
+  def test_it_has_attributes
+
+    new_shift = Shift.new("02715", "040895")
+    assert_equal '02715', new_shift.key
+    assert_equal "040895", new_shift.offset
+  end
 
 end
