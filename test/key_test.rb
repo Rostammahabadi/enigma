@@ -23,4 +23,14 @@ class KeyTest < MiniTest::Test
     assert_equal 0, new_key.dkey
   end
 
+  def test_it_can_create_keys
+    new_key = Key.new('02715')
+    new_key.create_keys
+
+    assert_equal 02, new_key.akey
+    assert_equal 27, new_key.bkey
+    assert_equal 71, new_key.ckey
+    assert_equal 15, new_key.dkey
+  end
+
 end
