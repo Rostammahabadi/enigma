@@ -13,4 +13,14 @@ class KeyTest < MiniTest::Test
     assert_instance_of Key, Key.new('02715')
   end
 
+  def test_it_has_attributes
+    new_key = Key.new('02715')
+
+    assert_equal '02715', new_key.key
+    assert_equal 0, new_key.akey
+    assert_equal 0, new_key.bkey
+    assert_equal 0, new_key.ckey
+    assert_equal 0, new_key.dkey
+  end
+
 end
