@@ -11,4 +11,18 @@ class Offset
     @doffset = 0
   end
 
+  # def format_date
+  #   binding.pry
+  #   date.strftime("%d%m%y")
+  # end
+
+
+  def create_offset
+    offset = (date.to_i**2).to_s.split("")
+    @aoffset = offset[-4].to_i
+    @boffset = offset[-3].to_i
+    @coffset = offset[-2].to_i
+    @doffset = offset[-1].to_i
+  end
+
 end
