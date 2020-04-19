@@ -20,4 +20,14 @@ class OffsetTest < MiniTest::Test
     assert_equal 0, new_offset.doffset
   end
 
+  def test_it_can_create_offsets
+    new_offset = Offset.new('040895')
+    new_offset.create_offset
+
+    assert_equal 1, new_offset.aoffset
+    assert_equal 0, new_offset.boffset
+    assert_equal 2, new_offset.coffset
+    assert_equal 5, new_offset.doffset
+  end
+
 end
