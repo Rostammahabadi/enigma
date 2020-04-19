@@ -25,4 +25,32 @@ class Enigma
     generate_encoded_message(starting_indexes,shift)
   end
 
+  # def format_date
+  # 	date_year = @date.year
+  # 	date_month = @date.month
+  # 	date_day = @date.day
+  # 	#six tests to test for each type of date entered
+  # 	@format_date = date_day.to_s.rjust(2, "0") + date_month.to_s.rjust(2, "0") + date_year.to_s[2..3]
+  # end
+
+  def get_starting_indices
+    message.map do |letter|
+      character_set.find_index(letter)
+    end
+  end
+  
+  def generate_encoded_message(array_of_indexes,shifts)
+    encoded_message = []
+    array_of_indexes.each.with_index do |char, index|
+      if char == nil
+        encoded_message << message[index]
+        next
+      end
+      #think about renaming shifts
+      final_shift = char + shifts.shifts[index%4] # decode change add to sub
+      encoded_message << character_set.rotate(final_shift)[0]
+    end
+    encoded_message.join
+  end
+
 end
