@@ -37,7 +37,6 @@ class EnigmaTest < MiniTest::Test
 	# end
 
 	def test_it_can_decrypt_with_key_and_date
-		skip
 		enigma = Enigma.new
     enigma.decrypt("keder ohulw", "02715", "040895")
 		assert_equal "hello world", enigma.decode
