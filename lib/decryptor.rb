@@ -19,7 +19,6 @@ class Decryptor < GenerateShifts
   end
 
   def decoding(array_of_indexes, shifts)
-    decoded_message = []
     array_of_indexes.each.with_index do |char, index|
       if char == nil
         decoded_message << message[index]

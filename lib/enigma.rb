@@ -25,16 +25,4 @@ class Enigma
 		Date.today.strftime("%d%m%y")
 	end
 
-	# def crack(message, date = generate_date_today)
-	# 	@message = message.downcase.split("")
-	# 	@date = date
-	# 	crack_message
-	# end
-	#
-	# def crack_message
-	# 	starting_indexes = get_starting_indices
-	# 	binding.pry
-	# 	offset = Offset.new(date)
-	# 	offset.create_offset
-	# end
 end

@@ -28,7 +28,7 @@ class EnigmaTest < MiniTest::Test
 
 		assert_equal expected, new_enigma.encrypt("hello world!", "02715", "040895")
     expected = {:encryption=>"hxda", :date=>"190420", :key=>"01824"}
-		
+
 		assert_equal expected, new_enigma.encrypt("abcd", "01824", "190420")
 	end
 
@@ -87,12 +87,9 @@ class EnigmaTest < MiniTest::Test
 		assert_equal expected, new_enigma.encrypt("!@", "02715", "040895")
 	end
 
-  def test_it_can_crack_an_encryption_with_a_date
-    skip
-    enigma = Enigma.new
-    expected = {decryption: "hello world end",date: "291018",key: "08304"}
-    assert_equal expected, enigma.crack("vjqtbeaweqihssi", "291018")
-  end
-
+	def test_it_can_generate_random_number_with_length_of_five
+		new_enigma = Enigma.new
+		assert_equal 5, new_enigma.generate_random_key.length
+	end
 
 end

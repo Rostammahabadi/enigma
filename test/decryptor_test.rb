@@ -59,4 +59,13 @@ class DecryptorTest < MiniTest::Test
     assert_equal "hello world!", new_decryptor.decoding(indexes,shifts)
   end
 
+  def test_create_return_hash
+    new_decryptor = Decryptor.new("keder ohulw!", "02715", "040895")
+    new_decryptor.stubs(:key).returns("02715")
+    new_decryptor.stubs(:date).returns("040895")
+    expected = {:encryption=>"hello world!", :date=>"040895", :key=>"02715"}
+
+    assert_equal expected, new_decryptor.create_return_hash("hello world!","encryption")
+  end
+
 end
