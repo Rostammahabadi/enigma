@@ -17,9 +17,8 @@ class Encryptor < GenerateShifts
       character_set.find_index(letter)
     end
   end
-
+# 27-28 into own method (2 args ~ 3)
   def encoding(array_of_indexes, shifts)
-    encoded_message = []
     array_of_indexes.each.with_index do |char, index|
       if char == nil
         encoded_message << message[index]
