@@ -64,8 +64,8 @@ class EnigmaTest < MiniTest::Test
     Enigma.stubs(:rjust).returns("02715")
     Date.stubs(:today).returns(Date.new(1995,8,4))
     enigma = Enigma.new
-    enigma.encrypt("hello world")
-    assert_equal ({:encryption=>"keder ohulw", :date=>"040895", :key=>"02715"}), enigma.encode
+    expected = ({:encryption=>"keder ohulw", :date=>"040895", :key=>"02715"})
+    assert_equal expected, enigma.encrypt("hello world")
   end
 
 end
