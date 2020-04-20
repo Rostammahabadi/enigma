@@ -1,5 +1,7 @@
 require_relative 'generate_shifts'
+require_relative 'hashable'
 class Encryptor < GenerateShifts
+  include Hashable
   attr_reader :key, :date, :message, :encoded_message, :character_set
 
   def initialize(message, key, date)
@@ -32,16 +34,7 @@ class Encryptor < GenerateShifts
   def generate_encoded_message
     array_of_indexes = get_starting_indices
     shifts = get_shifts
-    create_return_hash(encoding(array_of_indexes, shifts))
+    create_return_hash(encoding(array_of_indexes, shifts),"encryption")
   end
-
-  def create_return_hash(encrypted_message)
-    return_hash = {}
-    return_hash[:encryption] = encrypted_message
-    return_hash[:date] = date
-    return_hash[:key] = key
-    return_hash
-  end
-
 
 end

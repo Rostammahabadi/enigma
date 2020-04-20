@@ -1,6 +1,7 @@
 require_relative 'generate_shifts'
+require_relative 'hashable'
 class Decryptor < GenerateShifts
-  
+  include Hashable
   attr_reader :message, :key, :date, :decoded_message, :character_set
 
   def initialize(message, key, date)
@@ -33,14 +34,7 @@ class Decryptor < GenerateShifts
   def generate_decoded_message
     array_of_indexes = get_starting_indices
     shifts = get_shifts
-		create_return_hash(decoding(array_of_indexes, shifts))
+		create_return_hash(decoding(array_of_indexes, shifts),"decryption")
 	end
 
-  def create_return_hash(decrypted_message)
-    return_hash = {}
-    return_hash[:decryption] = decrypted_message
-    return_hash[:date] = date
-    return_hash[:key] = key
-    return_hash
-  end
 end
