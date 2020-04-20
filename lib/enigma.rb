@@ -59,9 +59,9 @@ class Enigma
     encoded_message.join
   end
 
-	def decrypt(message, key, date= Date.today)
+	def decrypt(message, key = generate_random_key, date = generate_date_today)
 		@message = message.downcase.split("")
-		@key = key ||= generate_random_key
+		@key = key
 		@date = date
 		decode
 	end
