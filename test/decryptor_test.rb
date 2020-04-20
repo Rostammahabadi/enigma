@@ -44,8 +44,6 @@ class DecryptorTest < MiniTest::Test
 
   def test_it_can_generate_decoded_message
     new_decryptor = Decryptor.new("keder ohulw!", "02715", "040895")
-    indexes = [10, 4, 3, 4, 17, 26, 14, 7, 20, 11, 22, nil]
-    shifts = [3, 27, 73, 20]
     expected = {:decryption=>"hello world!", :date=>"040895", :key=>"02715"}
 
     assert_equal expected, new_decryptor.generate_decoded_message
