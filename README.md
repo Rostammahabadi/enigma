@@ -36,3 +36,9 @@ Fork and clone this repository to your local machine
 ## Author
 
 * **Rostam Mahabadi**
+
+* Functionality: Meets expectations
+* Object Oriented Programming: Above expectations
+* Ruby Conventions and Mechanics: Above expectations
+* Test driven development: Above expectations
+* Version control: Meets expectations
