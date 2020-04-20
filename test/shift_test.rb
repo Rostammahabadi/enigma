@@ -28,15 +28,6 @@ class ShiftTest < MiniTest::Test
     key.create_keys
     offset = Offset.new('040895')
     offset.create_offset
-    # offset = mock
-    # key.stubs(:akey).returns(02)
-    # key.stubs(:bkey).returns(27)
-    # key.stubs(:ckey).returns(71)
-    # key.stubs(:dkey).returns(15)
-    # offset.stubs(:@aoffset).returns(1)
-    # offset.stubs(:@boffset).returns(0)
-    # offset.stubs(:@coffset).returns(2)
-    # offset.stubs(:@doffset).returns(5)
     new_shift = Shift.new(key, offset)
     new_shift.final_shift
     assert_equal [3, 27, 73, 20], new_shift.shifts
