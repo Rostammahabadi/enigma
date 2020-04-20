@@ -56,7 +56,7 @@ class EncryptorTest < MiniTest::Test
     new_encryptor.stubs(:key).returns("02715")
     new_encryptor.stubs(:date).returns("040895")
     expected = {:encryption=>"keder ohulw!", :date=>"040895", :key=>"02715"}
-    assert_equal expected, new_encryptor.create_return_hash("keder ohulw!")
+    assert_equal expected, new_encryptor.create_return_hash("keder ohulw!","encryption")
   end
 
 end
