@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'date'
 require './lib/key'
 require 'minitest/autorun'
@@ -21,7 +23,7 @@ class ShiftTest < MiniTest::Test
     assert_equal "040895", new_shift.offset
   end
 
-  ef test_it_can_create_offset
+  def test_it_can_create_offset
     key = Key.new('02715')
     key.create_keys
     offset = Offset.new('040895')
