@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'date'
 require './lib/enigma'
 require './lib/key'
@@ -8,6 +10,8 @@ require 'minitest/pride'
 require 'mocha'
 require 'pry'
 require 'mocha/minitest'
+require './lib/encryptor'
+require './lib/decryptor'
 
 class EnigmaTest < MiniTest::Test
 
@@ -35,14 +39,15 @@ class EnigmaTest < MiniTest::Test
 	def test_it_can_decrypt_with_key_and_date
 
 		enigma = Enigma.new
-    expected = {:encryption=>"hello world", :date=>"040895", :key=>"02715"}
+    expected = {:decryption=>"hello world", :date=>"040895", :key=>"02715"}
 		assert_equal expected, enigma.decrypt("keder ohulw", "02715", "040895")
 	end
 
   def test_it_can_decrypt_a_message_using_todays_date
+		Date.stubs(:strftime).returns(Date.new(2020,4,20))
     enigma = Enigma.new
     encrypted = enigma.encrypt("hello world", "02715")
-    expected = {:encryption=>"hello world", :date=>"190420", :key=>"02715"}
+    expected = {:decryption=>"hello world", :date=>"200420", :key=>"02715"}
     assert_equal expected, enigma.decrypt(encrypted[:encryption], "02715")
   end
 
@@ -60,18 +65,33 @@ class EnigmaTest < MiniTest::Test
   end
 
   def test_encrypt_a_message_with_a_message_and_no_key_or_date
-    skip
-    Enigma.stubs(:rjust).returns("02715")
     Date.stubs(:today).returns(Date.new(1995,8,4))
     enigma = Enigma.new
+    enigma.stubs(:generate_random_key).returns("02715")
     expected = ({:encryption=>"keder ohulw", :date=>"040895", :key=>"02715"})
     assert_equal expected, enigma.encrypt("hello world")
   end
 
+	def test_it_can_encrypt_message_with_characters_outside_set
+		new_enigma = Enigma.new
+		expected = {:encryption=>"!@", :date=>"040895", :key=>"02715"}
+		assert_equal expected, new_enigma.encrypt("!@", "02715", "040895")
+	end
+
   def test_it_can_crack_an_encryption_with_a_date
+    skip
     enigma = Enigma.new
     expected = {decryption: "hello world end",date: "291018",key: "08304"}
     assert_equal expected, enigma.crack("vjqtbeaweqihssi", "291018")
   end
+
+  # def test_create_return_hash
+  #   enigma = Enigma.new
+  #   enigma.stubs(:encryption).returns("hello world")
+  #   enigma.stubs(:date).returns("190420")
+  #   enigma.stubs(:key).returns("02715")
+  #   expected = {:encryption=>"hello world", :date=>"190420", :key=>"02715"}
+  #   assert_equal expected, enigma.create_return_hash(enigma)
+  # end
 
 end
