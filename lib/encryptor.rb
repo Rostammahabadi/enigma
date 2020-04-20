@@ -1,4 +1,5 @@
-class Encryptor
+require_relative 'generate_shifts'
+class Encryptor < GenerateShifts
   attr_reader :key, :date, :message, :encoded_message, :character_set
 
   def initialize(message, key, date)
@@ -7,15 +8,6 @@ class Encryptor
     @message = message.downcase
     @encoded_message = []
     @character_set = ("a".."z").to_a << " "
-  end
-
-  def get_shifts
-    new_key = Key.new(key)
-    new_key.create_keys
-    offset = Offset.new(date)
-    offset.create_offset
-    shift = Shift.new(new_key,offset)
-    shift.final_shift
   end
 
   def get_starting_indices
