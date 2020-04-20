@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'date'
 require './lib/offset'
 require 'minitest/autorun'
@@ -30,12 +32,5 @@ class OffsetTest < MiniTest::Test
     assert_equal 5, new_offset.doffset
   end
 
-  def test_it_can_strip_time_if_given_date_time
-    date_time_object = Date.strptime("040411", "%d%m%y")
-    new_offset = Offset.new(date_time_object)
-    new_offset.create_offset
-
-
-  end
 
 end
