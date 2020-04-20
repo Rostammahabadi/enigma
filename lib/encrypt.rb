@@ -2,6 +2,8 @@ require './lib/enigma'
 require './lib/key'
 require './lib/offset'
 require './lib/shift'
+require './lib/encryptor'
+
 handle = File.open(ARGV[0], "r")
 
 incoming_text = handle.read.strip
