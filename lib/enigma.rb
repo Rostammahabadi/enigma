@@ -5,15 +5,20 @@ class Enigma
 		@character_set = ("a".."z").to_a << " "
 	end
 
-  def encrypt(message, key, date= Date.today)
+  def encrypt(message, key = generate_random_key, date = generate_date_today)
 		@message = message.downcase.split("")
-		@key = key ||= generate_random_key
+		@key = key
 		@date = date
+		encode
 	end
 
   def generate_random_key
     rand(5 ** 5).to_s.rjust(5,'0')
   end
+
+	def generate_date_today
+		Date.today.strftime("%d%m%y")
+	end
 
   def encode
     new_key = Key.new(key)
@@ -23,16 +28,16 @@ class Enigma
     shift = Shift.new(new_key,offset)
     shift.final_shift
     starting_indexes = get_starting_indices
-    generate_encoded_message(starting_indexes,shift)
+    create_return_hash(generate_encoded_message(starting_indexes,shift))
   end
 
-  # def format_date
-  # 	date_year = @date.year
-  # 	date_month = @date.month
-  # 	date_day = @date.day
-  # 	#six tests to test for each type of date entered
-  # 	@format_date = date_day.to_s.rjust(2, "0") + date_month.to_s.rjust(2, "0") + date_year.to_s[2..3]
-  # end
+	def create_return_hash(encoded_message)
+		return_hash = {}
+		return_hash[:encryption] = encoded_message
+		return_hash[:date] = @date
+		return_hash[:key] = @key
+		return_hash
+	end
 
   def get_starting_indices
     message.map do |letter|
@@ -58,6 +63,7 @@ class Enigma
 		@message = message.downcase.split("")
 		@key = key ||= generate_random_key
 		@date = date
+		decode
 	end
 
 	def decode
@@ -68,7 +74,7 @@ class Enigma
 	    shift = Shift.new(new_key,offset)
 	    shift.final_shift
 	    starting_indexes = get_starting_indices
-	    decode_message(starting_indexes,shift)
+	    create_return_hash(decode_message(starting_indexes,shift))
   end
 
 	def decode_message(array_of_indexes, shifts)
