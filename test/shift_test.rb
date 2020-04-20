@@ -21,6 +21,7 @@ class ShiftTest < MiniTest::Test
     new_shift = Shift.new("02715", "040895")
     assert_equal '02715', new_shift.key
     assert_equal "040895", new_shift.offset
+    assert_equal [], new_shift.shifts
   end
 
   def test_it_can_create_offset
