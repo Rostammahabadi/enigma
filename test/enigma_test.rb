@@ -23,7 +23,6 @@ class EnigmaTest < MiniTest::Test
   def test_it_can_encode
 
 		new_enigma = Enigma.new
-
     expected = {:encryption=>"keder ohulw!", :date=>"040895", :key=>"02715"}
 
 		assert_equal expected, new_enigma.encrypt("hello world!", "02715", "040895")
